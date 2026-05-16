@@ -1,0 +1,45 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 2rem;
+}
+
+.modal {
+	background-color: white;
+	border-radius: 1rem;
+	width: 100%;
+	max-width: 400px;
+	overflow: hidden;
+	animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+	from {
+		transform: scale(0.9);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.header {
+	padding: 1rem;
+	font-weight: 700;
+	text-align: center;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.body {
+	padding: 1.5rem;
+	text-align: center;
+}

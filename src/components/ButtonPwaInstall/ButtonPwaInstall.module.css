@@ -1,0 +1,21 @@
+.installBtn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: linear-gradient(135deg, #0ea5e9, #0369a1);
+	color: #fff;
+	border: none;
+	border-radius: 12px;
+	padding: 10px 18px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	cursor: pointer;
+	width: 100%;
+	justify-content: center;
+	margin-top: 8px;
+	transition: opacity 0.2s;
+}
+
+.installBtn:hover {
+	opacity: 0.85;
+}

@@ -1,0 +1,186 @@
+.home {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 80px; /* Space for BottomNav */
+	background: linear-gradient(180deg, #e8f5e9 0%, #ffffff 50%);
+	min-height: 100vh;
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 1.5rem;
+	text-align: center;
+}
+
+.stars {
+	display: flex;
+	gap: 4px;
+	color: #22c55e;
+	margin-bottom: 0.5rem;
+}
+
+.heroTitle {
+	font-size: clamp(1rem, 5vw, 1.25rem);
+	font-weight: 800;
+	color: var(--primary-green);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	max-width: 100%;
+}
+
+.heroSubtitle {
+	font-size: 0.875rem;
+	color: var(--primary-green);
+	margin-top: 4px;
+	background: rgba(255, 255, 255, 0.5);
+	padding: 2px 12px;
+	border-radius: 20px;
+	border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.mainCard {
+	margin: 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.limitLabel {
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	margin-bottom: 0.5rem;
+}
+
+.limitAmount {
+	font-size: clamp(1.5rem, 10vw, 2.5rem);
+	font-weight: 700;
+	color: #1f2937;
+	margin-bottom: 0.5rem;
+	word-break: break-all;
+}
+
+.interestInfo {
+	font-size: 0.875rem;
+	color: var(--text-dark);
+	font-weight: 500;
+	margin-bottom: 1.5rem;
+}
+
+.promoBadge {
+	background-color: #fffbeb;
+	color: #d97706;
+	font-size: 0.75rem;
+	padding: 4px 12px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: 1.5rem;
+	width: fit-content;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.billCard {
+	margin: 0.5rem 1rem;
+	padding: 1.25rem;
+}
+
+.billHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 0.5rem;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.billTitle {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--text-dark);
+}
+
+.billStatus {
+	font-size: 0.75rem;
+	color: #22c55e;
+	background-color: #f0fdf4;
+	padding: 2px 8px;
+	border-radius: 4px;
+}
+
+.billAmount {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 4px;
+}
+
+.billDueDate {
+	font-size: 0.75rem;
+	color: var(--text-muted);
+}
+
+.billFooter {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.billAction {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -1.5rem;
+}
+
+.footerLinks {
+	display: flex;
+	justify-content: space-around;
+	margin: 2rem 0;
+}
+
+.footerLink {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.875rem;
+	color: var(--text-dark);
+}
+
+.footerIcon {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background-color: #f0fdf4;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--primary-green);
+}
+
+.compliance {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	opacity: 0.6;
+}
+
+.complianceIcons {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.complianceText {
+	font-size: 0.625rem;
+	text-align: center;
+	max-width: 250px;
+}

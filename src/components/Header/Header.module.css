@@ -1,0 +1,49 @@
+.header {
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+	background-color: transparent;
+	position: sticky;
+	top: 0;
+	z-index: 90;
+}
+
+.hasTitle {
+	background-color: white;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.left {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.backButton {
+	padding: 4px;
+}
+
+.title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--text-dark);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.right {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.icon {
+	color: var(--text-dark);
+}
+
+:global(.page) .header {
+	background-color: transparent;
+}

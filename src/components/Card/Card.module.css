@@ -1,0 +1,7 @@
+.card {
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: var(--card-shadow);
+	width: auto;
+	padding: clamp(1rem, 4vw, 1.5rem);
+}

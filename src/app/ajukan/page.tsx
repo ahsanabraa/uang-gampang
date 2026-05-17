@@ -1,7 +1,6 @@
 'use client'
 
 import { ChevronDown, ChevronRight, Coins, Info, Tag, TrendingDown } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import styles from './page.module.css'
@@ -9,11 +8,27 @@ import Button from '@/components/Button/Button'
 import Header from '@/components/Header/Header'
 import Modal from '@/components/Modal/Modal'
 
+// Data pinjaman per skenario
+const LOAN_SCENARIOS = [
+	{
+		// Skenario 1: pengajuan pertama, ketiga, dst (history.length genap → akan sukses)
+		amount: 'Rp 4.000.000',
+		amountReceived: 'Rp4.000.000',
+		helperText: 'Masukkan jumlah antara Rp500.000-Rp4.700.000'
+	},
+	{
+		// Skenario 2: pengajuan kedua, keempat, dst (history.length ganjil → akan gagal)
+		amount: 'Rp 1.000.000',
+		amountReceived: 'Rp1.000.000',
+		helperText: 'Masukkan jumlah antara Rp500.000-Rp1.000.000'
+	}
+]
+
 export default function AjukanPage() {
-	const router = useRouter()
 	const [selectedPeriod, setSelectedPeriod] = useState(12)
 	const [isLoading, setIsLoading] = useState(false)
-	const [currentAttempts, setCurrentAttempts] = useState(0)
+
+	const [scenarioIndex, setScenarioIndex] = useState(0)
 
 	const [modalState, setModalState] = useState<{ isOpen: boolean; type: 'success' | 'failed' }>({
 		isOpen: false,
@@ -21,11 +36,26 @@ export default function AjukanPage() {
 	})
 
 	useEffect(() => {
-		// Cleanup any old keys to avoid confusion
+		// Cleanup kunci lama agar tidak konflik
 		const oldKeys = ['loan_scenario', 'loan_attempts', 'loan_attempts_final']
 
 		oldKeys.forEach((key) => window.localStorage.removeItem(key))
+
+		// Baca history untuk menentukan skenario (hanya di client, setelah hydration)
+		const historyRaw = window.localStorage.getItem('loan_history_v1') || '[]'
+		let history: number[] = []
+
+		try {
+			history = JSON.parse(historyRaw)
+		} catch (_e) {
+			// invalid JSON, gunakan array kosong
+		}
+
+		// eslint-disable-next-line @eslint-react/set-state-in-effect
+		setScenarioIndex(history.length % 2)
 	}, [])
+
+	const loanData = LOAN_SCENARIOS[scenarioIndex]
 
 	const handleAjukan = () => {
 		setIsLoading(true)
@@ -47,9 +77,6 @@ export default function AjukanPage() {
 		history.push(Date.now())
 		window.localStorage.setItem('loan_history_v1', JSON.stringify(history))
 
-		// Update local state just for display if needed
-		setCurrentAttempts(history.length)
-
 		setTimeout(() => {
 			setModalState({ isOpen: true, type: isSuccess ? 'success' : 'failed' })
 			setIsLoading(false)
@@ -60,7 +87,7 @@ export default function AjukanPage() {
 		setModalState({ ...modalState, isOpen: false })
 
 		if (modalState.type === 'success') {
-			router.push('/')
+			window.location.href = '/'
 		}
 	}
 
@@ -78,9 +105,9 @@ export default function AjukanPage() {
 						<h3 className={styles.sectionTitle}>Jumlah Pinjaman</h3>
 						<span className={styles.limitBadge}>Naik Limit {'>'}</span>
 					</div>
-					<p className={styles.helperText}>Masukkan jumlah antara Rp500.000-Rp4.700.000</p>
+					<p className={styles.helperText}>{loanData.helperText}</p>
 					<div className={styles.amountDisplay}>
-						<span className={styles.amountValue}>Rp 4.000.000</span>
+						<span className={styles.amountValue}>{loanData.amount}</span>
 						<button
 							type="button"
 							className={styles.changeButton}>
@@ -174,7 +201,7 @@ export default function AjukanPage() {
 				<div className={styles.summary}>
 					<span className={styles.label}>Jumlah Diterima</span>
 					<div className={styles.valueWithIcon}>
-						<span className={styles.value}>Rp4.000.000</span>
+						<span className={styles.value}>{loanData.amountReceived}</span>
 						<ChevronRight
 							size={20}
 							color="#9ca3af"
@@ -234,7 +261,7 @@ export default function AjukanPage() {
 								fullWidth
 								onClick={() => {
 									setModalState({ ...modalState, isOpen: false })
-									router.push('/')
+									window.location.href = '/'
 								}}
 								className={styles.modalButton}>
 								Ajukan Lagi
@@ -243,9 +270,6 @@ export default function AjukanPage() {
 					)}
 				</div>
 			</Modal>
-
-			{/* Debug Info (Can be removed later) */}
-			<div style={{ fontSize: '10px', color: '#ccc', textAlign: 'center', marginTop: '20px', paddingBottom: '20px' }}>Attempt: {currentAttempts}</div>
 		</div>
 	)
 }

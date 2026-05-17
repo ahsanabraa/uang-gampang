@@ -2,6 +2,7 @@
 
 import { Share2, ShieldAlert, ShieldCheck, Star, Zap } from 'lucide-react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 import styles from './page.module.css'
 import BottomNav from '@/components/BottomNav/BottomNav'
@@ -9,7 +10,45 @@ import Button from '@/components/Button/Button'
 import Card from '@/components/Card/Card'
 import Header from '@/components/Header/Header'
 
+// Data tiap skenario
+const SCENARIOS = [
+	{
+		// Skenario 1: pengajuan pertama, ketiga, dst (history.length genap)
+		limit: '4.000.000',
+		hasBill: false,
+		billAmount: '',
+		billDays: '',
+		billDueDate: ''
+	},
+	{
+		// Skenario 2: pengajuan kedua, keempat, dst (history.length ganjil)
+		limit: '1.000.000',
+		hasBill: true,
+		billAmount: '1.486.933',
+		billDays: '36 hari tersisa',
+		billDueDate: '18/06/2026'
+	}
+]
+
 export default function Home() {
+	const [scenarioIndex, setScenarioIndex] = useState(0)
+
+	useEffect(() => {
+		const historyRaw = window.localStorage.getItem('loan_history_v1') || '[]'
+		let history: number[] = []
+
+		try {
+			history = JSON.parse(historyRaw)
+		} catch (_e) {
+			// invalid JSON, gunakan array kosong
+		}
+
+		// eslint-disable-next-line @eslint-react/set-state-in-effect
+		setScenarioIndex(history.length % 2)
+	}, [])
+
+	const scenario = SCENARIOS[scenarioIndex]
+
 	return (
 		<div className={styles.home}>
 			<Header />
@@ -43,7 +82,7 @@ export default function Home() {
 
 			<Card className={styles.mainCard}>
 				<span className={styles.limitLabel}>Limit Anda (Rp)</span>
-				<h1 className={styles.limitAmount}>4.700.000</h1>
+				<h1 className={styles.limitAmount}>{scenario.limit}</h1>
 				<p className={styles.interestInfo}>Bunga harian 0,2%</p>
 
 				<div className={styles.promoBadge}>
@@ -61,23 +100,25 @@ export default function Home() {
 				</Link>
 			</Card>
 
-			<Card className={styles.billCard}>
-				<div className={styles.billHeader}>
-					<h3 className={styles.billTitle}>Tagihan Belum Dibayar</h3>
-					<span className={styles.billStatus}>36 hari tersisa</span>
-				</div>
-				<div className={styles.billFooter}>
-					<div>
-						<div className={styles.billAmount}>128.835</div>
-						<div className={styles.billDueDate}>Tanggal Jatuh tempo : 18/06/2026</div>
+			{scenario.hasBill && (
+				<Card className={styles.billCard}>
+					<div className={styles.billHeader}>
+						<h3 className={styles.billTitle}>Tagihan Belum Dibayar</h3>
+						<span className={styles.billStatus}>{scenario.billDays}</span>
 					</div>
-					<Button
-						variant="primary"
-						style={{ padding: '0.5rem 1.5rem' }}>
-						Bayar
-					</Button>
-				</div>
-			</Card>
+					<div className={styles.billFooter}>
+						<div>
+							<div className={styles.billAmount}>{scenario.billAmount}</div>
+							<div className={styles.billDueDate}>Tanggal Jatuh tempo : {scenario.billDueDate}</div>
+						</div>
+						<Button
+							variant="primary"
+							style={{ padding: '0.5rem 1.5rem' }}>
+							Bayar
+						</Button>
+					</div>
+				</Card>
+			)}
 
 			<div className={styles.footerLinks}>
 				<div className={styles.footerLink}>

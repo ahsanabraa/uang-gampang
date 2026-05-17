@@ -16,8 +16,8 @@ const nextFont = Rubik({
 })
 
 export const metadata: Metadata = {
-	title: 'next-blank',
-	description: 'Next.js blank'
+	title: 'Uang Gampang - Pinjaman Online Terpercaya',
+	description: 'Pinjaman uang online cepat, mudah, dan terpercaya. Terdaftar dan diawasi oleh OJK.'
 }
 
 export const viewport: Viewport = {

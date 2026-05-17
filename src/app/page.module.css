@@ -86,46 +86,55 @@
 .billCard {
 	margin: 0.5rem 1rem;
 	padding: 1.25rem;
+	background: linear-gradient(135deg, #ffffff 0%, #f9fbf9 100%);
 }
 
 .billHeader {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;
-	margin-bottom: 0.5rem;
-	flex-wrap: wrap;
-	gap: 0.5rem;
+	align-items: center;
+	margin-bottom: 0.75rem;
+}
+
+.billTitleWrapper {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.billTitleIcon {
+	color: var(--primary-green);
 }
 
 .billTitle {
-	font-size: 1rem;
+	font-size: 0.95rem;
 	font-weight: 600;
 	color: var(--text-dark);
 }
 
-.billStatus {
-	font-size: 0.75rem;
-	color: #22c55e;
-	background-color: #f0fdf4;
-	padding: 2px 8px;
-	border-radius: 4px;
+.billAmountContainer {
+	display: flex;
+	align-items: baseline;
+}
+
+.currencySymbol {
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--text-dark);
+	margin-right: 2px;
 }
 
 .billAmount {
-	font-size: 1.25rem;
-	font-weight: 700;
-	margin-bottom: 4px;
-}
-
-.billDueDate {
-	font-size: 0.75rem;
-	color: var(--text-muted);
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: #1f2937;
+	line-height: 1;
 }
 
 .billFooter {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
 	flex-wrap: wrap;
 	gap: 0.5rem;
 }

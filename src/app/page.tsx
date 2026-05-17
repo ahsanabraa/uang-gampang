@@ -1,6 +1,6 @@
 'use client'
 
-import { Share2, ShieldAlert, ShieldCheck, Star, Zap } from 'lucide-react'
+import { Receipt, Share2, ShieldAlert, ShieldCheck, Star, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -103,13 +103,15 @@ export default function Home() {
 			{scenario.hasBill && (
 				<Card className={styles.billCard}>
 					<div className={styles.billHeader}>
-						<h3 className={styles.billTitle}>Tagihan Belum Dibayar</h3>
-						<span className={styles.billStatus}>{scenario.billDays}</span>
+						<div className={styles.billTitleWrapper}>
+							<Receipt size={18} className={styles.billTitleIcon} />
+							<h3 className={styles.billTitle}>Tagihan Belum Dibayar</h3>
+						</div>
 					</div>
 					<div className={styles.billFooter}>
-						<div>
-							<div className={styles.billAmount}>{scenario.billAmount}</div>
-							<div className={styles.billDueDate}>Tanggal Jatuh tempo : {scenario.billDueDate}</div>
+						<div className={styles.billAmountContainer}>
+							<span className={styles.currencySymbol}>Rp</span>
+							<span className={styles.billAmount}>{scenario.billAmount}</span>
 						</div>
 						<Button
 							variant="primary"

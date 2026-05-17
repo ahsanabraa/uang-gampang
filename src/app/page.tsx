@@ -145,7 +145,7 @@ export default function Home() {
 					/>
 					<div style={{ fontSize: '0.625rem', fontWeight: 600 }}>OJK</div>
 				</div>
-				<p className={styles.complianceText}>PT Indonesia Fintopia Technology Berizin dan Diawasi oleh: Otoritas Jasa Keuangan (OJK)</p>
+				<p className={styles.complianceText}>PT Cassava Indonesia Berizin dan Diawasi oleh: Otoritas Jasa Keuangan (OJK)</p>
 			</div>
 
 			<BottomNav />
